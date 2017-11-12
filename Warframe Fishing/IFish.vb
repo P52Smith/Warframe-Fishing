@@ -32,6 +32,7 @@ Public Interface IFishSizes
     ReadOnly Property Small As UInteger
     ReadOnly Property Medium As UInteger
     ReadOnly Property Large As UInteger
+    ReadOnly Property Total As UInteger
 End Interface
 
 Public Class FishSizes
@@ -49,6 +50,7 @@ Public Class FishSizes
             If _small <> value Then
                 _small = value
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Small)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Total)))
             End If
         End Set
     End Property
@@ -61,6 +63,7 @@ Public Class FishSizes
             If _medium <> value Then
                 _medium = value
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Medium)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Total)))
             End If
         End Set
     End Property
@@ -73,8 +76,15 @@ Public Class FishSizes
             If _large <> value Then
                 _large = value
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Large)))
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Total)))
             End If
         End Set
+    End Property
+
+    Public ReadOnly Property Total As UInteger Implements IFishSizes.Total
+        Get
+            Return Small + Medium + Large
+        End Get
     End Property
 
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged

@@ -2,7 +2,7 @@
 Imports Warframe_Fishing
 
 Public Class Fish
-    Implements IFish
+    Implements IFish, INotifyPropertyChanged
 
     Private Class _FishProducts
         Implements IFishParts
@@ -60,9 +60,10 @@ Public Class Fish
         End Sub
     End Class
     Private Class _FishParts
-        Implements IFishParts
+        Implements IFishParts, INotifyPropertyChanged
 
         Private ourFish As Fish
+        Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
         Public ReadOnly Property Standing As IFishSizes Implements IFishParts.Standing
             Get
@@ -100,8 +101,15 @@ Public Class Fish
             End Get
         End Property
 
-        Public Sub New(theFish)
+        Public Sub New(theFish As Fish)
             ourFish = theFish
+            AddHandler ourFish.Caught.PropertyChanged, Sub()
+                                                           RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Standing)))
+                                                           RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Meat)))
+                                                           RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Scales)))
+                                                           RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Oil)))
+                                                           RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Special)))
+                                                       End Sub
         End Sub
     End Class
     Private _name As String = "Unknown"
@@ -112,6 +120,7 @@ Public Class Fish
     Private _products As _FishProducts
     Private _caught As New FishSizes(0, 0, 0)
     Private _productsAvailable As New _FishParts(Me)
+    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
     Public ReadOnly Property Name As String Implements IFish.Name
         Get
@@ -155,6 +164,7 @@ Public Class Fish
         End Get
         Set(value As FishSizes)
             _caught = value
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ProductsAvailable)))
         End Set
     End Property
 

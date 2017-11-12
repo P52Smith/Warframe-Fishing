@@ -49,6 +49,21 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn Header="Standing" DisplayMemberBinding="{Binding ProductsAvailable.Standing.Total}"/>
+                    <GridViewColumn Header="Meat" DisplayMemberBinding="{Binding ProductsAvailable.Meat.Total}"/>
+                    <GridViewColumn Header="Scales" DisplayMemberBinding="{Binding ProductsAvailable.Scales.Total}"/>
+                    <GridViewColumn Header="Oil" DisplayMemberBinding="{Binding ProductsAvailable.Oil.Total}"/>
+                    <GridViewColumn Header="Special" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ProductsAvailable.Special.Total}"/>
+                                    <TextBlock Text="x "/>
+                                    <TextBlock Text="{Binding Products.SpecialName}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
