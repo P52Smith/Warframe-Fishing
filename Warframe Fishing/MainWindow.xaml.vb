@@ -2,7 +2,7 @@
 
 Class MainWindow
 
-    Private allFish As New ObservableCollection(Of Fish)
+    Public Property AllFish As New ObservableCollection(Of Fish)
 
     Public Sub New()
         ' This call is required by the designer.
@@ -23,6 +23,48 @@ Class MainWindow
         allFish.Add(New Fish("Karkina", Biomes.Coastal, TimeOfDay.Both, Spears.Tulok, Baits.Twighlight, New FishSizes(100, 125, 200), New FishSizes(1, 2, 3), New FishSizes(3, 4, 5), New FishSizes(4, 6, 8), "Karkina Antenna"))
         allFish.Add(New Fish("Glappid", Biomes.Coastal, TimeOfDay.Night, Spears.Peram, Baits.Glappid, New FishSizes(1200, 1500, 2000), New FishSizes(4, 6, 8), New FishSizes(5, 7, 9), New FishSizes(3, 5, 7), "Seram Beetle Shell"))
         allFish.Add(New Fish("Norg", Biomes.Lake, TimeOfDay.Night, Spears.Peram, Baits.Norg, New FishSizes(500, 625, 100), New FishSizes(2, 3, 4), New FishSizes(5, 7, 10), New FishSizes(3, 5, 6), "Norg Brain"))
+    End Sub
+
+    Private Sub CaughtSmall_Subtract_Click(sender As Button, e As RoutedEventArgs)
+        Dim theFish As Fish = sender.DataContext
+        If theFish.Caught.Small > 0 Then
+            theFish.Caught.Small -= 1
+        End If
+    End Sub
+
+    Private Sub CaughtSmall_Add_Click(sender As Button, e As RoutedEventArgs)
+        Dim theFish As Fish = sender.DataContext
+        If theFish.Caught.Small < UInteger.MaxValue Then
+            theFish.Caught.Small += 1
+        End If
+    End Sub
+
+    Private Sub CaughtMedium_Subtract_Click(sender As Button, e As RoutedEventArgs)
+        Dim theFish As Fish = sender.DataContext
+        If theFish.Caught.Medium > 0 Then
+            theFish.Caught.Medium -= 1
+        End If
+    End Sub
+
+    Private Sub CaughtMedium_Add_Click(sender As Button, e As RoutedEventArgs)
+        Dim theFish As Fish = sender.DataContext
+        If theFish.Caught.Medium < UInteger.MaxValue Then
+            theFish.Caught.Medium += 1
+        End If
+    End Sub
+
+    Private Sub CaughtLarge_Subtract_Click(sender As Button, e As RoutedEventArgs)
+        Dim theFish As Fish = sender.DataContext
+        If theFish.Caught.Large > 0 Then
+            theFish.Caught.Large -= 1
+        End If
+    End Sub
+
+    Private Sub CaughtLarge_Add_Click(sender As Button, e As RoutedEventArgs)
+        Dim theFish As Fish = sender.DataContext
+        If theFish.Caught.Large < UInteger.MaxValue Then
+            theFish.Caught.Large += 1
+        End If
     End Sub
 
 End Class

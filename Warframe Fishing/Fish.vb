@@ -110,7 +110,7 @@ Public Class Fish
     Private _spear As Spears
     Private _bait As Baits = Baits.None
     Private _products As _FishProducts
-    Private _caught As FishSizes
+    Private _caught As New FishSizes(0, 0, 0)
     Private _productsAvailable As New _FishParts(Me)
 
     Public ReadOnly Property Name As String Implements IFish.Name

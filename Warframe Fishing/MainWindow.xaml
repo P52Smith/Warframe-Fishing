@@ -5,8 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warframe_Fishing"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow"
+        SizeToContent="WidthAndHeight"
+        DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
+    <StackPanel Orientation="Vertical">
+        <ListView ItemsSource="{Binding AllFish}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Where found" DisplayMemberBinding="{Binding Biome}"/>
+                    <GridViewColumn Header="Best spear" DisplayMemberBinding="{Binding Spear}"/>
+                    <GridViewColumn Header="Required bait" DisplayMemberBinding="{Binding Bait}"/>
+                    <GridViewColumn Header="Small caught" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="-" Width="15" Margin="3,0" Click="CaughtSmall_Subtract_Click"/>
+                                    <TextBox Width="50" Text="{Binding Caught.Small}" Margin="3,0"/>
+                                    <Button Content="+" Width="15" Margin="3,0" Click="CaughtSmall_Add_Click"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Medium caught" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="-" Width="15" Margin="3,0" Click="CaughtMedium_Subtract_Click"/>
+                                    <TextBox Width="50" Text="{Binding Caught.Medium}" Margin="3,0"/>
+                                    <Button Content="+" Width="15" Margin="3,0" Click="CaughtMedium_Add_Click"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Large caught" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="-" Width="15" Margin="3,0" Click="CaughtLarge_Subtract_Click"/>
+                                    <TextBox Width="50" Text="{Binding Caught.Large}" Margin="3,0"/>
+                                    <Button Content="+" Width="15" Margin="3,0" Click="CaughtLarge_Add_Click"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </StackPanel>
 </Window>
