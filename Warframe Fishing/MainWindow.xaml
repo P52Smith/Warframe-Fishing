@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warframe_Fishing"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="Warframe Fishing Tracker"
         SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
     <StackPanel Orientation="Vertical">
         <ListView ItemsSource="{Binding AllFish}">
