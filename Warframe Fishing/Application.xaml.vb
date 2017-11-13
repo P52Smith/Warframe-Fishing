@@ -32,4 +32,10 @@ Unfortunately, we have to close now, sorry", "An error has occurred", MessageBox
         End Get
     End Property
 
+    Private Sub Application_Startup(sender As Object, e As StartupEventArgs)
+        InitializeComponent()
+#If Not DEBUG Then
+        AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf unhandledExceptionHandler
+#End If
+    End Sub
 End Class
