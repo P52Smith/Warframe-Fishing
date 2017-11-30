@@ -179,6 +179,7 @@ Public Class Fish
         _biome = theBiome
         _activeTime = theActiveTime
         _spear = theSpear
+        _bait = theBait
         _products = New _FishProducts(theStanding, theMeat, theScales, theOil, theSpecialPartName)
     End Sub
 End Class
