@@ -15,6 +15,7 @@
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Where found" DisplayMemberBinding="{Binding Biome}"/>
+                    <GridViewColumn Header="When found" DisplayMemberBinding="{Binding ActiveTime}"/>
                     <GridViewColumn Header="Best spear" DisplayMemberBinding="{Binding Spear}"/>
                     <GridViewColumn Header="Required bait" DisplayMemberBinding="{Binding Bait}"/>
                     <GridViewColumn Header="Small caught" >
