@@ -10,15 +10,38 @@
         ResizeMode="CanMinimize"
         DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
     <StackPanel Orientation="Vertical">
-        <ListView ItemsSource="{Binding AllFish}">
+        <ListView ItemsSource="{Binding AllFish}" x:Name="FishView">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Where found" DisplayMemberBinding="{Binding Biome}"/>
-                    <GridViewColumn Header="When found" DisplayMemberBinding="{Binding ActiveTime}"/>
-                    <GridViewColumn Header="Best spear" DisplayMemberBinding="{Binding Spear}"/>
-                    <GridViewColumn Header="Required bait" DisplayMemberBinding="{Binding Bait}"/>
-                    <GridViewColumn Header="Small caught" >
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Name" Click="FishListColumnHeader_Click">Name</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Biome}" Width="105">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Biome" Click="FishListColumnHeader_Click">Where found</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding ActiveTime}" Width="105">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ActiveTime" Click="FishListColumnHeader_Click">When found</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Spear}" Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Spear" Click="FishListColumnHeader_Click">Best spear</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Bait}" Width="105">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Bait" Click="FishListColumnHeader_Click">Required bait</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="115">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Caught.Small" Click="FishListColumnHeader_Click">Small caught</GridViewColumnHeader>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -29,7 +52,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Medium caught" >
+                    <GridViewColumn Width="115">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Caught/Medium" Click="FishListColumnHeader_Click">Medium caught</GridViewColumnHeader>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -40,7 +66,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Large caught" >
+                    <GridViewColumn Width="115">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Caught.Large" Click="FishListColumnHeader_Click">Large caught</GridViewColumnHeader>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -51,11 +80,30 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Standing" DisplayMemberBinding="{Binding ProductsAvailable.Standing.Total}" Width="60"/>
-                    <GridViewColumn Header="Meat" DisplayMemberBinding="{Binding ProductsAvailable.Meat.Total}" Width="60"/>
-                    <GridViewColumn Header="Scales" DisplayMemberBinding="{Binding ProductsAvailable.Scales.Total}" Width="60"/>
-                    <GridViewColumn Header="Oil" DisplayMemberBinding="{Binding ProductsAvailable.Oil.Total}" Width="60"/>
-                    <GridViewColumn Header="Special" >
+                    <GridViewColumn DisplayMemberBinding="{Binding ProductsAvailable.Standing.Total}" Width="70">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ProductsAvailable.Standing.Total" Click="FishListColumnHeader_Click">Standing</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding ProductsAvailable.Meat.Total}" Width="70">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ProductsAvailable.Meat.Total" Click="FishListColumnHeader_Click">Meat</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding ProductsAvailable.Scales.Total}" Width="70">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ProductsAvailable.Scales.Total" Click="FishListColumnHeader_Click">Scales</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding ProductsAvailable.Oil.Total}" Width="70">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ProductsAvailable.Oil.Total" Click="FishListColumnHeader_Click">Oil</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn >
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ProductsAvailable.Special.Total" Click="FishListColumnHeader_Click">Special</GridViewColumnHeader>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

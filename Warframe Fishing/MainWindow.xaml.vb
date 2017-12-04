@@ -1,8 +1,12 @@
 ﻿Imports System.Collections.ObjectModel
+Imports System.ComponentModel
 
 Class MainWindow
 
     Public Property AllFish As New ObservableCollection(Of Fish)
+
+    Private activeColumn As GridViewColumnHeader
+    Private ourSortAdorner As SortAdorner
 
     Public Sub New()
         ' This call is required by the designer.
@@ -69,4 +73,51 @@ Class MainWindow
         End If
     End Sub
 
+    Private Sub FishListColumnHeader_Click(sender As Object, e As RoutedEventArgs)
+        Dim column As GridViewColumnHeader = CType(sender, GridViewColumnHeader)
+        Dim sortBy As String = column.Tag.ToString
+        If activeColumn IsNot Nothing Then
+            AdornerLayer.GetAdornerLayer(activeColumn).Remove(ourSortAdorner)
+            FishView.Items.SortDescriptions.Clear()
+        End If
+        Dim newDir As ListSortDirection = ListSortDirection.Ascending
+        If (activeColumn Is column) AndAlso (ourSortAdorner.Direction = newDir) Then
+            newDir = ListSortDirection.Descending
+        End If
+        activeColumn = column
+        ourSortAdorner = New SortAdorner(activeColumn, newDir)
+        AdornerLayer.GetAdornerLayer(activeColumn).Add(ourSortAdorner)
+        FishView.Items.SortDescriptions.Add(New SortDescription(sortBy, newDir))
+    End Sub
+
+    Public Class SortAdorner
+        Inherits Adorner
+
+        Private Shared ascGeometry As Geometry = Geometry.Parse("M 0 4 L 3.5 0 L 7 4 Z")
+        Private Shared descGeometry As Geometry = Geometry.Parse("M 0 0 L 3.5 4 L 7 0 Z")
+
+        Public Property Direction As ListSortDirection
+
+        Public Sub New(element As UIElement, dir As ListSortDirection)
+            MyBase.New(element)
+            Me.Direction = dir
+        End Sub
+
+        Protected Overrides Sub OnRender(drawingContext As DrawingContext)
+            MyBase.OnRender(drawingContext)
+            If AdornedElement.RenderSize.Width < 20 Then
+                Return
+            End If
+            Dim Transform As TranslateTransform = New TranslateTransform(
+                                        AdornedElement.RenderSize.Width - 15,
+                                        (AdornedElement.RenderSize.Height - 5) / 2)
+            drawingContext.PushTransform(Transform)
+            Dim Geometry As Geometry = ascGeometry
+            If (Me.Direction = ListSortDirection.Descending) Then
+                Geometry = descGeometry
+            End If
+            drawingContext.DrawGeometry(Brushes.Black, Nothing, Geometry)
+            drawingContext.Pop()
+        End Sub
+    End Class
 End Class
