@@ -7,6 +7,7 @@ Class MainWindow
 
     Private activeColumn As GridViewColumnHeader
     Private ourSortAdorner As SortAdorner
+    Private activeSortGroup As MenuItem = Nothing
 
     Public Sub New()
         ' This call is required by the designer.
@@ -120,4 +121,34 @@ Class MainWindow
             drawingContext.Pop()
         End Sub
     End Class
+
+    Private Sub FishListGroup_Click(sender As MenuItem, e As RoutedEventArgs)
+        Dim theView As CollectionView = CollectionViewSource.GetDefaultView(FishView.ItemsSource)
+        If activeSortGroup IsNot sender Then
+            If activeSortGroup IsNot Nothing Then
+                activeSortGroup.IsChecked = False
+            End If
+            Dim groupDescription As PropertyGroupDescription
+            Select Case sender.Name
+                Case FishView_Group_Biome.Name
+                    groupDescription = New PropertyGroupDescription("Biome")
+                Case FishView_Group_ActiveTime.Name
+                    groupDescription = New PropertyGroupDescription("ActiveTime")
+                Case FishView_Group_Spear.Name
+                    groupDescription = New PropertyGroupDescription("Spear")
+                Case Else
+                    Return
+            End Select
+            theView.GroupDescriptions.Clear()
+            theView.GroupDescriptions.Add(groupDescription)
+            activeSortGroup = sender
+            activeSortGroup.IsChecked = True
+        Else
+            theView.GroupDescriptions.Clear()
+            If activeSortGroup IsNot Nothing Then
+                activeSortGroup.IsChecked = False
+            End If
+            activeSortGroup = Nothing
+        End If
+    End Sub
 End Class

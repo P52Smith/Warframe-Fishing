@@ -10,6 +10,15 @@
         ResizeMode="CanMinimize"
         DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
     <StackPanel Orientation="Vertical">
+        <Menu>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Group by">
+                    <MenuItem x:Name="FishView_Group_Biome" Header="Where _found" Click="FishListGroup_Click"/>
+                    <MenuItem x:Name="FishView_Group_ActiveTime" Header="_When found" Click="FishListGroup_Click"/>
+                    <MenuItem x:Name="FishView_Group_Spear" Header="Best _spear" Click="FishListGroup_Click"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
         <ListView ItemsSource="{Binding AllFish}" x:Name="FishView">
             <ListView.View>
                 <GridView>
@@ -116,6 +125,15 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
     </StackPanel>
 </Window>
