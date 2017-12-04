@@ -7,9 +7,9 @@ Public Enum Spears
 End Enum
 
 Public Enum Biomes
+    Coastal
     Lake
     Landlocked
-    Coastal
 End Enum
 
 Public Enum Baits
@@ -24,8 +24,8 @@ End Enum
 
 Public Enum TimeOfDay
     Day
-    Night
     Both
+    Night
 End Enum
 
 Public Interface IFishSizes
