@@ -1,4 +1,4 @@
-﻿<Window x:Class="MainWindow"
+﻿<Window x:Name="window" x:Class="MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,6 +17,9 @@
                     <MenuItem x:Name="FishView_Group_ActiveTime" Header="_When found" Click="FishListGroup_Click"/>
                     <MenuItem x:Name="FishView_Group_Spear" Header="Best _spear" Click="FishListGroup_Click"/>
                 </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Options">
+                <MenuItem Header="_Resource booster mode" IsCheckable="True" IsChecked="{Binding ResourceBoosterMode, ElementName=window}"/>
             </MenuItem>
         </Menu>
         <ListView ItemsSource="{Binding AllFish}" x:Name="FishView">

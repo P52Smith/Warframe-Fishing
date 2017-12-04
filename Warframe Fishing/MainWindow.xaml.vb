@@ -2,12 +2,28 @@
 Imports System.ComponentModel
 
 Class MainWindow
+    Implements INotifyPropertyChanged
+
+    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
     Public Property AllFish As New ObservableCollection(Of Fish)
 
     Private activeColumn As GridViewColumnHeader
     Private ourSortAdorner As SortAdorner
     Private activeSortGroup As MenuItem = Nothing
+
+    Private _ResourceBoosterMode As Boolean = False
+    Public Property ResourceBoosterMode As Boolean
+        Get
+            Return _ResourceBoosterMode
+        End Get
+        Set(value As Boolean)
+            If _ResourceBoosterMode <> value Then
+                _ResourceBoosterMode = value
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ResourceBoosterMode)))
+            End If
+        End Set
+    End Property
 
     Public Sub New()
         ' This call is required by the designer.
@@ -34,43 +50,55 @@ Class MainWindow
 
     Private Sub CaughtSmall_Subtract_Click(sender As Primitives.RepeatButton, e As RoutedEventArgs)
         Dim theFish As Fish = sender.DataContext
-        If theFish.Caught.Small > 0 Then
-            theFish.Caught.Small -= 1
+        If theFish.Caught.Small > If(ResourceBoosterMode, 1, 0) Then
+            theFish.Caught.Small -= If(ResourceBoosterMode, 2, 1)
+        Else
+            theFish.Caught.Small = 0
         End If
     End Sub
 
     Private Sub CaughtSmall_Add_Click(sender As Primitives.RepeatButton, e As RoutedEventArgs)
         Dim theFish As Fish = sender.DataContext
-        If theFish.Caught.Small < UInteger.MaxValue Then
-            theFish.Caught.Small += 1
+        If theFish.Caught.Small < If(ResourceBoosterMode, UInteger.MaxValue - 1, UInteger.MaxValue) Then
+            theFish.Caught.Small += If(ResourceBoosterMode, 2, 1)
+        Else
+            theFish.Caught.Small = UInteger.MaxValue
         End If
     End Sub
 
     Private Sub CaughtMedium_Subtract_Click(sender As Primitives.RepeatButton, e As RoutedEventArgs)
         Dim theFish As Fish = sender.DataContext
-        If theFish.Caught.Medium > 0 Then
-            theFish.Caught.Medium -= 1
+        If theFish.Caught.Medium > If(ResourceBoosterMode, 1, 0) Then
+            theFish.Caught.Medium -= If(ResourceBoosterMode, 2, 1)
+        Else
+            theFish.Caught.Medium = 0
         End If
     End Sub
 
     Private Sub CaughtMedium_Add_Click(sender As Primitives.RepeatButton, e As RoutedEventArgs)
         Dim theFish As Fish = sender.DataContext
-        If theFish.Caught.Medium < UInteger.MaxValue Then
-            theFish.Caught.Medium += 1
+        If theFish.Caught.Medium < If(ResourceBoosterMode, UInteger.MaxValue - 1, UInteger.MaxValue) Then
+            theFish.Caught.Medium += If(ResourceBoosterMode, 2, 1)
+        Else
+            theFish.Caught.Medium = UInteger.MaxValue
         End If
     End Sub
 
     Private Sub CaughtLarge_Subtract_Click(sender As Primitives.RepeatButton, e As RoutedEventArgs)
         Dim theFish As Fish = sender.DataContext
-        If theFish.Caught.Large > 0 Then
-            theFish.Caught.Large -= 1
+        If theFish.Caught.Large > If(ResourceBoosterMode, 1, 0) Then
+            theFish.Caught.Large -= If(ResourceBoosterMode, 2, 1)
+        Else
+            theFish.Caught.Large = 0
         End If
     End Sub
 
     Private Sub CaughtLarge_Add_Click(sender As Primitives.RepeatButton, e As RoutedEventArgs)
         Dim theFish As Fish = sender.DataContext
-        If theFish.Caught.Large < UInteger.MaxValue Then
-            theFish.Caught.Large += 1
+        If theFish.Caught.Large < If(ResourceBoosterMode, UInteger.MaxValue - 1, UInteger.MaxValue) Then
+            theFish.Caught.Large += If(ResourceBoosterMode, 2, 1)
+        Else
+            theFish.Caught.Large = UInteger.MaxValue
         End If
     End Sub
 
