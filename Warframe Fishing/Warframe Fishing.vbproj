@@ -24,7 +24,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Warframe Fishing Tracker</ProductName>
     <PublisherName>P52Smith</PublisherName>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -190,6 +190,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon_LotusClean_Black.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Warframe Fishing.pdb">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
